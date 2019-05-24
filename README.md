@@ -1,1 +1,0 @@
-# sean-pearce.github.io
