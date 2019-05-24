@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://sean_pearce.github.io/sitemap.xml
+Sitemap: https://shaoliyin.me/sitemap.xml

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 邵溧崟的博客</title>
-    <link>http://sean_pearce.github.io/categories/</link>
+    <link>https://shaoliyin.me/categories/</link>
     <description>Recent content in Categories on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 23 May 2019 16:54:12 +0800</lastBuildDate>
     
-	<atom:link href="http://sean_pearce.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://shaoliyin.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>想法</title>
-      <link>http://sean_pearce.github.io/categories/%E6%83%B3%E6%B3%95/</link>
+      <link>https://shaoliyin.me/categories/%E6%83%B3%E6%B3%95/</link>
       <pubDate>Thu, 23 May 2019 16:54:12 +0800</pubDate>
       
-      <guid>http://sean_pearce.github.io/categories/%E6%83%B3%E6%B3%95/</guid>
+      <guid>https://shaoliyin.me/categories/%E6%83%B3%E6%B3%95/</guid>
       <description></description>
     </item>
     
