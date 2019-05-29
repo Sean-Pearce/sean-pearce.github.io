@@ -6,10 +6,37 @@
     <description>Recent content in Tags on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 29 May 2019 19:38:06 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 21:28:14 +0800</lastBuildDate>
     
 	<atom:link href="https://shaoliyin.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Flink</title>
+      <link>https://shaoliyin.me/tags/flink/</link>
+      <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/tags/flink/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Setup Guide</title>
+      <link>https://shaoliyin.me/tags/setup-guide/</link>
+      <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/tags/setup-guide/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>云计算</title>
+      <link>https://shaoliyin.me/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/</link>
+      <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hadoop</title>
@@ -17,24 +44,6 @@
       <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
       
       <guid>https://shaoliyin.me/tags/hadoop/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>云计算</title>
-      <link>https://shaoliyin.me/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/</link>
-      <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>配置教程</title>
-      <link>https://shaoliyin.me/tags/%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/tags/%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B/</guid>
       <description></description>
     </item>
     

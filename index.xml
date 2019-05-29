@@ -1,46 +1,714 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>邵溧崟的博客</title>
-    <link>https://shaoliyin.me/</link>
-    <description>Recent content on 邵溧崟的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Wed, 29 May 2019 19:38:06 +0800</lastBuildDate>
+    <channel>
+        <title>邵溧崟的博客</title>
+        <link>https://shaoliyin.me/</link>
+        <description>Recent content on 邵溧崟的博客</description>
+        <generator>Hugo -- gohugo.io</generator>
+        
+        <language>zh-cn</language>
+        
+        <lastBuildDate>Wed, 29 May 2019 21:28:14 +0800</lastBuildDate>
+        
     
-	<atom:link href="https://shaoliyin.me/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href= "https://shaoliyin.me/index.xml" rel= "self" type= "application/rss+xml" />
     
     
-    <item>
-      <title>关于</title>
-      <link>https://shaoliyin.me/about/</link>
-      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/about/</guid>
-      <description>About Me 本科就读于北航电子信息工程学院，目前在计算机学院读研，研究方向为分布式系统。 欢迎邮件交流。</description>
-    </item>
-    
-    <item>
-      <title>Hadoop 集群搭建教程</title>
-      <link>https://shaoliyin.me/post/hadoop-cluster-setup/</link>
-      <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/post/hadoop-cluster-setup/</guid>
-      <description>&lt;p&gt;这篇文章是我前段时间搭建一个三节点 Hadoop 集群时顺便整理的，集群包含 192.168.105.10 / 11 / 12 三台机器，三台机器的 hostname 分别设为 ivic10 / ivic11 / ivic12，其中第一台机器作为 master，后两台作为 slaves。&lt;/p&gt;
+        <item>
+            <title>Flink 集群搭建教程</title>
+            <link>https://shaoliyin.me/post/flink-cluster-setup/</link>
+            <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
+            
+            <guid>https://shaoliyin.me/post/flink-cluster-setup/</guid>
+            <description>&lt;p&gt;这篇文章中的部署环境和上一篇文章完全相同，记录了部署 Flink 集群的过程和遇到的一些问题。&lt;/p&gt;
 
-&lt;p&gt;搭建过程中我参考了 Hadoop 官方文档和几篇博客，但还是遇到了一些问题，于是我把整个过程记录了下来，希望可以帮助到大家。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>第一篇博客</title>
-      <link>https://shaoliyin.me/post/my-first-blog/</link>
-      <pubDate>Thu, 23 May 2019 16:54:12 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/post/my-first-blog/</guid>
-      <description>&lt;p&gt;很久以来我一直想拥有一个属于自己的博客，但每每想到维护网站的那一堆麻烦事，就失去了折腾的动力。&lt;/p&gt;
+&lt;h2 id=&#34;1-先决条件&#34;&gt;1 先决条件&lt;/h2&gt;
 
-&lt;p&gt;最近在参与实验室项目的过程中，接触到很多新技术新知识，愈发地觉得有必要把自己学到的东西记录下来，一方面可以给自己做个备忘，避免重复劳动，另一方面也可以把自己的思考分享到互联网上。因此我用两天时间（其中大部分时间花在了挑选主题上），在 Github Pages 上部署了这个博客。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
+&lt;p&gt;在部署 Flink 之前，请确认集群的每个节点都符合以下条件：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;已安装 Java 1.8.x 或以上版本（推荐 1.8 版本）&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;节点两两之间可以 SSH 免密码登陆&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;已部署 Hadoop（如果只是部署 Standalone Cluster 则不需要 Hadoop）&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果你已经按照 &lt;a href=&#34;https://shaoliyin.me/post/hadoop-cluster-setup/&#34;&gt;Hadoop 集群搭建教程&lt;/a&gt; 成功建立了 Hadoop 集群，那么以上条件均已满足。&lt;/p&gt;
+
+&lt;h2 id=&#34;2-下载-flink-二进制文件&#34;&gt;2 下载 Flink 二进制文件&lt;/h2&gt;
+
+&lt;p&gt;在 Flink 的 &lt;a href=&#34;https://flink.apache.org/downloads.html&#34;&gt;下载页面&lt;/a&gt; 中有多个版本可以选择，因为之前选择了 Hadoop 2.7.7 版本，所以这里选择与之对应的 &lt;code&gt;Apache Flink 1.7.2 with Hadoop 2.7&lt;/code&gt; 版本，Scala 版本选择最新的 2.12。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ~/bigdata
+&lt;span class=&#34;c1&#34;&gt;# Apache网站上的镜像太慢，从清华镜像下载&lt;/span&gt;
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.7.2/flink-1.7.2-bin-hadoop27-scala_2.12.tgz
+&lt;span class=&#34;c1&#34;&gt;# 解压到当前文件夹&lt;/span&gt;
+tar -xzvf flink-1.7.2-bin-hadoop27-scala_2.12.tgz -C .&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;3-配置-flink&#34;&gt;3 配置 Flink&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;注意：如果只需要部署 Flink on YARN，那么可以跳过这一小节，因为 YARN 会帮你打理好一切。&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 切换到flink配置路径&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ./flink-1.7.2/conf&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-1-flink-conf-yaml&#34;&gt;3.1 flink-conf.yaml&lt;/h3&gt;
+
+&lt;p&gt;将 &lt;code&gt;jobmanager.rpc.address&lt;/code&gt; 指向 master 节点，其他配置项可以按照机器实际硬件情况酌情填写，此处使用默认值。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span class=&#34;c&#34;&gt;# The host/IP of JobManager&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;jobmanager.rpc.address&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;ivic10&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The heap size for the JobManager JVM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;jobmanager.heap.size&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;1024m&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The heap size for the TaskManager JVM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;taskmanager.heap.size&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;1024m&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The number of task slots that each TaskManager offers. Each slot runs one parallel pipeline.&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;taskmanager.numberOfTaskSlots&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# The parallelism used for programs that did not specify and other parallelism.&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;parallelism.default&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-2-slaves&#34;&gt;3.2 slaves&lt;/h3&gt;
+
+&lt;p&gt;向 slaves 文件写入 slave 节点的 host/IP 地址&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;ivic11
+ivic12&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;4-将配置好的-flink-分发到其他节点&#34;&gt;4 将配置好的 Flink 分发到其他节点&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要先在11/12节点上建立 /homne/ivic/bigdata/ 文件夹&lt;/span&gt;
+scp -r /home/ivic/bigdata/flink-1.7.2 &lt;span class=&#34;m&#34;&gt;192&lt;/span&gt;.168.105.11:/home/ivic/bigdata/flink-1.7.2
+scp -r /home/ivic/bigdata/flink-1.7.2 &lt;span class=&#34;m&#34;&gt;192&lt;/span&gt;.168.105.12:/home/ivic/bigdata/flink-1.7.2&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;5-以-standalone-模式启动-flink&#34;&gt;5 以 Standalone 模式启动 Flink&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$FLINK_HOME&lt;/span&gt;
+./bin/start-cluster.sh&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;然后可以在 &lt;a href=&#34;localhost&#34;&gt;ivic10:8081&lt;/a&gt; 查看 Flink 集群的运行情况。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww1.sinaimg.cn/large/963d773fly1g0z2d20luij21hc0rz0up.jpg&#34; alt=&#34;standalone web ui&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;./examples&lt;/code&gt; 路径下有许多打包好的示例程序，可以用于验证 Flink 集群是否正常运行。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./bin/flink run ./examples/batch/WordCount.jar&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;上面的命令会向 Flink 集群提交一个 wordcount 任务，这个示例程序可以指定输入和输出路径，这里没有指定，因此输入文件为程序自带的一小段文本，结果直接输出在屏幕上。
+如果 Flink 集群工作正常，应该会在屏幕上输出以下结果：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;# 省略前面的输出
+(wrong,1)
+(you,1)
+Program execution finished
+Job with JobID d7df697505c1f68d4eda2828b6eb18e2 has finished.
+Job Runtime: 3158 ms
+Accumulator Results:
+- 47b31488879a3449d67aca67f5b75188 (java.util.ArrayList) [170 elements]&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;6-以-flink-on-yarn-模式启动&#34;&gt;6 以 Flink on YARN 模式启动&lt;/h2&gt;
+
+&lt;p&gt;把 Flink 运行在 YARN 上有两种方式，第一种方式是建立一个长期运行的 Flink YARN Session，然后向这个 Session 提交 Flink Job，多个任务同时运行时会共享资源。第二种方式是为单个任务启动一个 Flink 集群，这个任务会独占 Flink 集群的所有资源，任务结束即代表集群被回收。&lt;/p&gt;
+
+&lt;p&gt;另外，Flink on YARN 模式需要系统中设置了 YARN_CONF_DIR 或 HADOOP_CONF_DIR 环境变量，如果未设置，请在 &lt;code&gt;~/.profile&lt;/code&gt; 中加入以下内容，然后使用 &lt;code&gt;source ~/.profile&lt;/code&gt; 命令使修改立即生效。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 在这条命令前定义HADOOP_HOME环境变量&lt;/span&gt;
+&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;HADOOP_CONF_DIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;HADOOP_HOME&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;/etc/hadoop&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;6-1-flink-yarn-session&#34;&gt;6.1 Flink YARN Session&lt;/h3&gt;
+
+&lt;p&gt;使用下列命令来启动一个拥有 2 个 TaskManager 的 Flink 集群，每个 TaskManager 有 2 GB 内存，2 个 slot。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./bin/YARN-session.sh -n &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; -tm &lt;span class=&#34;m&#34;&gt;2048&lt;/span&gt; -s &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;完整的参数列表如下&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;Usage:
+   Required
+     -n,--container &amp;lt;arg&amp;gt;   Number of YARN container to allocate &lt;span class=&#34;o&#34;&gt;(=&lt;/span&gt;Number of Task Managers&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+   Optional
+     -D &amp;lt;arg&amp;gt;                        Dynamic properties
+     -d,--detached                   Start detached
+     -jm,--jobManagerMemory &amp;lt;arg&amp;gt;    Memory &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; JobManager Container with optional unit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;default: MB&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+     -nm,--name                      Set a custom name &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; the application on YARN
+     -q,--query                      Display available YARN resources &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;memory, cores&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+     -qu,--queue &amp;lt;arg&amp;gt;               Specify YARN queue.
+     -s,--slots &amp;lt;arg&amp;gt;                Number of slots per TaskManager
+     -tm,--taskManagerMemory &amp;lt;arg&amp;gt;   Memory per TaskManager Container with optional unit &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;default: MB&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
+     -z,--zookeeperNamespace &amp;lt;arg&amp;gt;   Namespace to create the Zookeeper sub-paths &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; HA mode&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;启动 YARN Session 以后会输出 JobManager 的 Web Interface 地址，打开以后是这样的：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://ww1.sinaimg.cn/large/963d773fly1g0z2d20n7dj21hc0s13zr.jpg&#34; alt=&#34;yarn web ui&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;仔细一看，Task Managers，Task Slots 怎么都是 0 呢？难道是哪里出了问题？其实并没有问题，从某个版本开始 Flink 允许动态分配资源，在没有任务的时候不分配 TaskManager。接下来我们就提交一个任务试试。&lt;/p&gt;
+
+&lt;p&gt;因为启动 YARN Session 以后 Flink Client 会一直在前台运行，所以先用 &lt;code&gt;Ctrl + Z&lt;/code&gt; 快捷键把 Client 转到后台，然后再提交任务。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./bin/flink run ./examples/batch/WordCount.jar&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;在任务运行期间观察 Web Interface，会发现 Task Managers 变为 1，Task Slots 变为 2 ，与启动集群时指定的参数不符，这是因为 YARN 集群中只有两个 NodeManager，ivic11 和 ivic12，其中一个作为 JobManager，因此只剩一个节点可以作为 TaskManager。&lt;/p&gt;
+
+&lt;p&gt;任务的运行结果和 Standalone 模式下完全一样。&lt;/p&gt;
+
+&lt;h3 id=&#34;6-2-single-flink-job-on-yarn&#34;&gt;6.2 Single Flink job on YARN&lt;/h3&gt;
+
+&lt;p&gt;下面这条命令会为 wordcount 任务启动一个独占的 Flink 集群，任务结束集群即被回收。其中 -m 选项指定 Flink 集群的启动模式，-yn 选项指定 TaskManager 的数目。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;./bin/flink run -m YARN-cluster -yn &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt; ./examples/batch/WordCount.jar&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;任务的运行结果和 Standalone 模式下完全一样。&lt;/p&gt;
+
+&lt;h2 id=&#34;7-参考&#34;&gt;7 参考&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.7/ops/deployment/cluster_setup.html&#34;&gt;Standalone Cluster Deployment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ci.apache.org/projects/flink/flink-docs-release-1.7/ops/deployment/YARN_setup.html&#34;&gt;YARN Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/52439318/flink-taskmanagers-do-not-start-until-job-is-submitted-in-YARN-cluster&#34;&gt;Flink TaskManagers do not start in YARN Cluster&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+        </item>
+        
+        <item>
+            <title>Hadoop 集群搭建教程</title>
+            <link>https://shaoliyin.me/post/hadoop-cluster-setup/</link>
+            <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
+            
+            <guid>https://shaoliyin.me/post/hadoop-cluster-setup/</guid>
+            <description>&lt;p&gt;这篇文章是我前段时间搭建一个三节点 Hadoop 集群时顺便整理的，集群包含 192.168.105.10 / 11 / 12 三台机器，三台机器的 hostname 分别设为 ivic10 / ivic11 / ivic12，其中第一台机器作为 master，后两台作为 slaves。&lt;/p&gt;
+
+&lt;p&gt;搭建过程中我参考了 Hadoop 官方文档和几篇博客，但还是遇到了一些问题，于是我把整个过程记录了下来，希望可以帮助到大家。&lt;/p&gt;
+
+&lt;h2 id=&#34;1-先决条件&#34;&gt;1 先决条件&lt;/h2&gt;
+
+&lt;p&gt;在开始安装 Hadoop 之前，请确认集群的每台机器上均已安装 JDK1.8（注意是 SunJDK 而不是 OpenJDK），并且已经配置好密钥登陆（服务器两两之间可以无密码SSH登陆）。&lt;/p&gt;
+
+&lt;p&gt;除此之外还需要在三台机器的 &lt;code&gt;/etc/hosts&lt;/code&gt; 文件中写入以下内容（需要root权限）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;192.168.105.10 ivic10
+192.168.105.11 ivic11
+192.168.105.12 ivic12&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;配置好以后，在任意一台机器上可以用 hostname 无密码 SSH 登陆到另外两台机器上&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 在ivic10上操作&lt;/span&gt;
+ssh ivic11
+&lt;span class=&#34;c1&#34;&gt;# 如果一切正常，应该可以直接登陆到ivic11上&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;2-下载二进制文件&#34;&gt;2 下载二进制文件&lt;/h2&gt;
+
+&lt;p&gt;在 Hadoop 的 &lt;a href=&#34;https://hadoop.apache.org/releases.html&#34;&gt;release&lt;/a&gt; 页面中有数个版本可以选择，因为后续要在 Hadoop 集群上部署其他应用，所以这里选择兼容性最好的 2.7.7 版本。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;mkdir ~/bigdata
+&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ~/bigdata
+&lt;span class=&#34;c1&#34;&gt;# Apache网站上的镜像太慢，从清华镜像下载&lt;/span&gt;
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz
+&lt;span class=&#34;c1&#34;&gt;# 解压到当前文件夹&lt;/span&gt;
+tar -xzvf hadoop-2.7.7.tar.gz -C .&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;3-修改配置文件&#34;&gt;3 修改配置文件&lt;/h2&gt;
+
+&lt;p&gt;首先在 &lt;code&gt;~/.profile&lt;/code&gt; 中添加环境变量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;HADOOP_HOME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/home/ivic/bigdata/hadoop-2.7.7
+&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;PATH&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;$PATH&lt;/span&gt;:&lt;span class=&#34;nv&#34;&gt;$HADOOP_HOME&lt;/span&gt;/bin&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;用 &lt;code&gt;source&lt;/code&gt; 命令让环境变量立即生效&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; ~/.profile&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;然后切换到 Hadoop 的配置文件目录下，开始修改 Hadoop 的配置文件 &lt;code&gt;cd ~/bigdata/hadoop-2.7.7/etc/hadoop&lt;/code&gt;，每一个配置项代表的意义可以参考文末给出的 Hadoop 官方文档。&lt;/p&gt;
+
+&lt;h3 id=&#34;3-1-core-site-xml&#34;&gt;3.1 core-site.xml&lt;/h3&gt;
+
+&lt;p&gt;通过&lt;code&gt;fs.defaultFS&lt;/code&gt;指定 NameNode 的 IP 地址和端口号，通过&lt;code&gt;hadoop.tmp.dir&lt;/code&gt;指定临时文件存放路径&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;fs.defaultFS&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;hdfs://ivic10:9000/&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;hadoop.tmp.dir&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;file:/tmp/hadoop-2.7.7&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-2-hdfs-site-xml&#34;&gt;3.2 hdfs-site.xml&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;dfs.replication&lt;/code&gt; 指定备份数目为 3，&lt;code&gt;dfs.name.dir&lt;/code&gt; 指定 NameNode 的文件存储路径，&lt;code&gt;dfs.data.dir&lt;/code&gt; 指定 DataNode 的文件存储路径。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;dfs.replication&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;3&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;dfs.namenode.name.dir&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;file:/home/ivic/bigdata/hdfs/name&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;dfs.datanode.data.dir&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;file:/home/ivic/bigdata/hdfs/data&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-3-mapred-site-xml&#34;&gt;3.3 mapred-site.xml&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 将mapred-site.xml.template复制一份&lt;/span&gt;
+cp mapred-site.xml.template mapreduce-site.xml&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;然后修改 &lt;code&gt;mapred-site.xml&lt;/code&gt; 的内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;mapreduce.framework.name&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;yarn&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-4-yarn-xml&#34;&gt;3.4 yarn.xml&lt;/h3&gt;
+
+&lt;p&gt;配置后两项是因为在部署 Flink on Yarn 的过程中出现了 FlinkYarnSession 无法启动的问题，从 StackOverflow 得知应该在此处加上这两项配置，否则虚拟内存占用会超出限制导致 Flink 无法启动。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;yarn.nodemanager.aux-services&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;mapreduce_shuffle&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;yarn.resourcemanager.hostname&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;ivic10&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;yarn.nodemanager.vmem-check-enabled&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;false&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;Whether virtual memory limits will be enforced for containers&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;property&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;yarn.nodemanager.vmem-pmem-ratio&lt;span class=&#34;nt&#34;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;value&amp;gt;&lt;/span&gt;4&lt;span class=&#34;nt&#34;&gt;&amp;lt;/value&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;nt&#34;&gt;&amp;lt;description&amp;gt;&lt;/span&gt;Ratio between virtual memory to physical memory when setting memory limits for containers&lt;span class=&#34;nt&#34;&gt;&amp;lt;/description&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;nt&#34;&gt;&amp;lt;/property&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;nt&#34;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-5-slaves&#34;&gt;3.5 slaves&lt;/h3&gt;
+
+&lt;p&gt;添加 slave 节点的 hostname 到该文件中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;ivic11
+ivic12&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;3-6-hadoop-env-sh&#34;&gt;3.6 hadoop-env.sh&lt;/h3&gt;
+
+&lt;p&gt;在这里为 Hadoop 设置环境变量&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;JAVA_HOME&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/jdk1.8.0_201&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;4-分发配置文件&#34;&gt;4 分发配置文件&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 需要先在11/12节点上建立 /homne/ivic/bigdata/ 文件夹&lt;/span&gt;
+scp -r /home/ivic/bigdata/hadoop-2.7.7 &lt;span class=&#34;m&#34;&gt;192&lt;/span&gt;.168.105.11:/home/ivic/bigdata/hadoop-2.7.7
+scp -r /home/ivic/bigdata/hadoop-2.7.7 &lt;span class=&#34;m&#34;&gt;192&lt;/span&gt;.168.105.12:/home/ivic/bigdata/hadoop-2.7.7&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;然后分别在其他节点上配置环境变量 &lt;code&gt;HADOOP_HOME&lt;/code&gt; 和 &lt;code&gt;PATH&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&#34;5-启动集群&#34;&gt;5 启动集群&lt;/h2&gt;
+
+&lt;h3 id=&#34;5-1-格式化-hdfs&#34;&gt;5.1 格式化 HDFS&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ~/bigdata/hadoop-2.7.7
+hdfs namenode -format&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;注意：此命令只有在第一次启动前需要执行，目的是格式化 NameNode&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;5-2-启动集群&#34;&gt;5.2 启动集群&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 启动 HDFS&lt;/span&gt;
+./sbin/start-dfs.sh
+&lt;span class=&#34;c1&#34;&gt;# 启动 YARN&lt;/span&gt;
+./sbin/start-yarn.sh
+&lt;span class=&#34;c1&#34;&gt;# 以上两条命令也可以用 ./sbin/start-all.sh 代替&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 关闭集群 ./sbin/stop-all.sh&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;使用 jps 命令查看服务运行情况&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# master节点中运行的服务&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;25928&lt;/span&gt; SecondaryNameNode
+&lt;span class=&#34;m&#34;&gt;25742&lt;/span&gt; NameNode
+&lt;span class=&#34;m&#34;&gt;26387&lt;/span&gt; Jps
+&lt;span class=&#34;m&#34;&gt;26078&lt;/span&gt; ResourceManager&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# slave节点中运行的服务&lt;/span&gt;
+&lt;span class=&#34;m&#34;&gt;24002&lt;/span&gt; NodeManager
+&lt;span class=&#34;m&#34;&gt;23899&lt;/span&gt; DataNode
+&lt;span class=&#34;m&#34;&gt;24179&lt;/span&gt; Jps&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;6-提交示例任务&#34;&gt;6 提交示例任务&lt;/h2&gt;
+
+&lt;p&gt;如果一切顺利，现在可以向 Hadoop 提交任务了。这里我们使用 Hadoop 自带的实例程序运行 wordcount 任务，以此验证 Hadoop 是否部署成功。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ~/bigdata/hadoop-2.7.7
+&lt;span class=&#34;c1&#34;&gt;# 把当前路径下的 LICENSE.txt 文件复制到 HDFS 中&lt;/span&gt;
+hadoop fs -put ./LICENSE.txt /wordcount/input
+&lt;span class=&#34;c1&#34;&gt;# 提交任务，最后两个参数分别指定任务的输入和输出&lt;/span&gt;
+hadoop jar &lt;span class=&#34;nv&#34;&gt;$HADOOP_HOME&lt;/span&gt;/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.7.jar wordcount /wordcount/input /wordcount/output
+&lt;span class=&#34;c1&#34;&gt;# 查看输出路径&lt;/span&gt;
+hadoop fs -ls /wordcount/output
+&lt;span class=&#34;c1&#34;&gt;# 如果一切正常，该路径下包含两个文件&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;# 第一个文件是空文件，表示任务运行成功&lt;/span&gt;
+/wordcount/output/_SUCCESS
+&lt;span class=&#34;c1&#34;&gt;# 第二个文件是输出文件，统计了 LICENSE.txt 中每个单词出现的次数&lt;/span&gt;
+/wordcount/output/part-r-00000&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;7-遇到的坑&#34;&gt;7 遇到的坑&lt;/h2&gt;
+
+&lt;h3 id=&#34;7-1-hostname-配置&#34;&gt;7.1 hostname 配置&lt;/h3&gt;
+
+&lt;p&gt;之前部署 Hadoop 的时候都是在 192.168.7.x 的机器上，那些机器的 hostname 和 hosts 都已经配置好了，直接用就行。但是 192.168.105.x 的这几台机器并没有配好，每台机器的 hostname 都是 ivic。
+一开始嫌麻烦就没配，在配置文件里直接填了 IP 地址，结果最后启动集群以后就出现了一个很奇怪的现象——用 jps 命令查看每个节点的服务，一切正常，但在 web ui 里看不到可用的 DataNode，总可用空间是 0。后来看 DataNode 上的日志文件才发现是 hostname 无法解析，不知道为什么 Hadoop 把 IP 地址当作 hostname 了。于是重新配置 hostname，配好以后再重启 Hadoop，问题解决。&lt;/p&gt;
+
+&lt;p&gt;hostname 的 配置过程如下（这几台机器上装的是 Ubuntu 18.04，不同系统的配置过程略有区别）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 将该文件中的内容修改为想要的hostname，比如ivic10&lt;/span&gt;
+sudo vim /etc/hostname
+&lt;span class=&#34;c1&#34;&gt;# 让修改立即生效&lt;/span&gt;
+hostname ivic10&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;7-2-format-命令&#34;&gt;7.2 format 命令&lt;/h3&gt;
+
+&lt;p&gt;在排查上一个问题的过程时，我曾经尝试把 Hadoop 集群停掉然后用 &lt;code&gt;hdfs namenode -format&lt;/code&gt; 命令格式化 NameNode，达到“恢复出厂设置”的效果。然而这样做以后再启动 hdfs，原本能启动的 DataNode 现在也启动不了了。浏览 NameNode 的日志发现问题出在 DataNode 的 cluster id 和 NameNode 不一致，所以无法启动。原来 format 命令会为 NameNode 生成一个新的 cluster id，而 DataNode 的 cluster id 信息存储在 &lt;code&gt;dfs.datanode.data.dir&lt;/code&gt; 中，并没有发生变化，因此会产生冲突。解决方案是在执行 format 命令之后删除所有 DataNode 的 &lt;code&gt;dfs.datanode.data.dir&lt;/code&gt;，也就是 &lt;code&gt;/home/ivic/bigdata/hdfs/data&lt;/code&gt;文件夹。&lt;/p&gt;
+
+&lt;h3 id=&#34;7-3-日志&#34;&gt;7.3 日志&lt;/h3&gt;
+
+&lt;p&gt;Hadoop 的日志系统很完善，出了问题在日志里都能找到原因。如果 NameNode 启动不了，就去看 NameNode 的日志，DataNode 启动不了，就去看 DataNode 的日志。日志文件路径为 &lt;code&gt;$HADOOP_HOME/logs&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;7-4-配置文件的同步&#34;&gt;7.4 配置文件的同步&lt;/h3&gt;
+
+&lt;p&gt;如果集群用的是 nfs，改一台机器的配置文件其他机器上就全部同步修改好了（不过要注意不要把 &lt;code&gt;dfs.namenode.name.dir&lt;/code&gt; 和 &lt;code&gt;dfs.datanode.data.dir&lt;/code&gt; 配置到网络文件系统上）。&lt;/p&gt;
+
+&lt;p&gt;如果没有 nfs 该怎么办呢，难道每次都要手动修改所有机器上的配置文件吗？不是滴，这时候就需要祭出神器 rsync 了，只要用一条命令就可以把修改推送到其他机器上。&lt;/p&gt;
+
+&lt;p&gt;举个例子，比如你刚在 ivic10 上修改了 &lt;code&gt;$HADOOP_HOME/etc/hadoop/&lt;/code&gt; 路径下的 core-site.xml，hdfs-site.xml，yarn.xml 三个文件，如何把修改同步到 ivic11 和 ivic12 呢？&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$HADOOP_HOME&lt;/span&gt;/etc
+&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; ip in &lt;span class=&#34;m&#34;&gt;11&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; rsync -r hadoop ivic@ivic&lt;span class=&#34;si&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;ip&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;:/home/ivic/bigdata/hadoop-2.7.7/etc&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;done&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;搞定。&lt;/p&gt;
+
+&lt;h2 id=&#34;8-参考&#34;&gt;8 参考&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://hadoop.apache.org/docs/r2.7.7/hadoop-project-dist/hadoop-common/FileSystemShell.html&#34;&gt;FS Shell Commands&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000015669114&#34;&gt;rsync 的使用方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ityouknow.com/hadoop/2017/07/24/hadoop-cluster-setup.html&#34;&gt;Hadoop 分布式集群搭建&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hadoop.apache.org/docs/r2.7.7/hadoop-project-dist/hadoop-common/ClusterSetup.html&#34;&gt;Hadoop Cluster Setup&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+        </item>
+        
+        <item>
+            <title>第一篇博客</title>
+            <link>https://shaoliyin.me/post/my-first-blog/</link>
+            <pubDate>Thu, 23 May 2019 16:54:12 +0800</pubDate>
+            
+            <guid>https://shaoliyin.me/post/my-first-blog/</guid>
+            <description>&lt;p&gt;很久以来我一直想拥有一个属于自己的博客，但每每想到维护网站的那一堆麻烦事，就失去了折腾的动力。&lt;/p&gt;
+
+&lt;p&gt;最近在参与实验室项目的过程中，接触到很多新技术新知识，愈发地觉得有必要把自己学到的东西记录下来，一方面可以给自己做个备忘，避免重复劳动，另一方面也可以把自己的思考分享到互联网上。因此我用两天时间（其中大部分时间花在了挑选主题上），在 Github Pages 上部署了这个博客。&lt;/p&gt;
+
+&lt;p&gt;本博客不只限于技术内容，我还会在这里分享我的生活和想法。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Happy Blogging !&lt;/strong&gt;&lt;/p&gt;</description>
+        </item>
+        
+    </channel>
 </rss>
