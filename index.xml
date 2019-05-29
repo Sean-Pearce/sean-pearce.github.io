@@ -6,7 +6,7 @@
     <description>Recent content on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 23 May 2019 16:54:12 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 May 2019 19:38:06 +0800</lastBuildDate>
     
 	<atom:link href="https://shaoliyin.me/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,7 +17,18 @@
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>https://shaoliyin.me/about/</guid>
-      <description>本科就读于北航电子信息工程学院，目前在计算机学院读研，研究方向为分布式系统。 如需联系请发邮件。</description>
+      <description>About Me 本科就读于北航电子信息工程学院，目前在计算机学院读研，研究方向为分布式系统。 欢迎邮件交流。</description>
+    </item>
+    
+    <item>
+      <title>Hadoop 集群搭建教程</title>
+      <link>https://shaoliyin.me/post/hadoop-cluster-setup/</link>
+      <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/hadoop-cluster-setup/</guid>
+      <description>&lt;p&gt;这篇文章是我前段时间搭建一个三节点 Hadoop 集群时顺便整理的，集群包含 192.168.105.10 / 11 / 12 三台机器，三台机器的 hostname 分别设为 ivic10 / ivic11 / ivic12，其中第一台机器作为 master，后两台作为 slaves。&lt;/p&gt;
+
+&lt;p&gt;搭建过程中我参考了 Hadoop 官方文档和几篇博客，但还是遇到了一些问题，于是我把整个过程记录了下来，希望可以帮助到大家。&lt;/p&gt;</description>
     </item>
     
     <item>
