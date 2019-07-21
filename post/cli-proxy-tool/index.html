@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>命令行代理小工具——gkd - 邵溧崟的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="邵溧崟" /><meta name="description" content="哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……
+从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。 有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。
+" /><meta name="keywords" content="科学上网, 命令行代理" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://shaoliyin.me/post/cli-proxy-tool/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="命令行代理小工具——gkd" />
+<meta property="og:description" content="哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……
+
+从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shaoliyin.me/post/cli-proxy-tool/" />
+<meta property="article:published_time" content="2019-07-21T16:24:12&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-21T16:24:12&#43;08:00"/>
+
+<meta itemprop="name" content="命令行代理小工具——gkd">
+<meta itemprop="description" content="哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……
+
+从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。">
+
+
+<meta itemprop="datePublished" content="2019-07-21T16:24:12&#43;08:00" />
+<meta itemprop="dateModified" content="2019-07-21T16:24:12&#43;08:00" />
+<meta itemprop="wordCount" content="1320">
+
+
+
+<meta itemprop="keywords" content="科学上网,setup-guide," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="命令行代理小工具——gkd"/>
+<meta name="twitter:description" content="哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……
+
+从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">邵溧崟的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">邵溧崟的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">命令行代理小工具——gkd</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-07-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+            </div>
+          <span class="more-meta"> 约 1320 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    
+    <div class="post-content">
+      <p>哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……</p>
+
+<p>从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。</p>
+
+<p>但是作为一只专业的程序猿，怎么能被一面矮墙（并不）挡住去路呢。我们先在开发环境中配置代理（按下不表），然后修改一下 git 的配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># http proxy</span>
+git config --global http.https://github.com.proxy http://ip:port
+<span class="c1"># socks5 proxy</span>
+git config --global http.https://github.com.proxy socks5://ip:port</code></pre></td></tr></table>
+</div>
+</div>
+<p>解释一下，上面两条命令是用来修改 git 的代理设置的，<code>http.</code> 到 <code>.proxy</code> 中间的字段可以指定要走代理的域名，如果留空的话就相当于全局代理。
+最后面的 <code>http://ip:port</code> 就是代理地址了，两种代理协议的配置只有这里有区别。</p>
+
+<p>配好之后试着 clone 一下 requests 库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">shaol@DESKTOP-DT1RASS MINGW64 ~/Documents/Repos
+$ git clone https://github.com/kennethreitz/requests.git
+Cloning into <span class="s1">&#39;requests&#39;</span>...
+remote: Enumerating objects: <span class="m">19</span>, <span class="k">done</span>.
+remote: Counting objects: <span class="m">100</span>% <span class="o">(</span><span class="m">19</span>/19<span class="o">)</span>, <span class="k">done</span>.
+remote: Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">15</span>/15<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">23428</span> <span class="o">(</span>delta <span class="m">5</span><span class="o">)</span>, reused <span class="m">10</span> <span class="o">(</span>delta <span class="m">4</span><span class="o">)</span>, pack-reused <span class="m">23409</span>
+Receiving objects: <span class="m">100</span>% <span class="o">(</span><span class="m">23428</span>/23428<span class="o">)</span>, <span class="m">9</span>.77 MiB <span class="p">|</span> <span class="m">2</span>.56 MiB/s, <span class="k">done</span>.
+Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">15352</span>/15352<span class="o">)</span>, <span class="k">done</span>.</code></pre></td></tr></table>
+</div>
+</div>
+<p>矮哟不错哟，2.56MB/s 的平均速度基本上什么库都是秒下了。</p>
+
+<p>既然问题已经解决了，那这篇文章是不是就到此为止了呢？非也非也~ git 的问题的确解决了，但 Linux 系统中还有很多其他的命令行工具需要代理，比如 wget，curl 这些，
+怎么才能让它们也走代理呢？比较传统的办法是直接修改当前 shell 的环境变量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://ip:port</code></pre></td></tr></table>
+</div>
+</div>
+<p>但是这样做有一个问题：在你手动把环境变量改回来之前，后续执行的所有命令都会遵循这个设置（走代理），失去了灵活性。那么，有没有一种方法可以非常方便地指定一条命令走不走代理呢？</p>
+
+<p>当然有啦，不然我也不会写（水）这篇文章了哈哈哈。接下来先讲怎么用，再讲为什么。</p>
+
+<p>首先随便找个地方新建个文件，就叫 <code>gkd</code> 吧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">touch gkd</code></pre></td></tr></table>
+</div>
+</div>
+<p>然后把下面的内容复制到这个文件中（记得修改代理地址）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/usr/bin/env bash
+</span><span class="cp"></span><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://ip:port
+<span class="nb">exec</span> <span class="si">${</span><span class="p">@:</span><span class="nv">1</span><span class="si">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>再赋予执行权限：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">chmod +x gkd</code></pre></td></tr></table>
+</div>
+</div>
+<p>最后，把这个脚本扔到任意一个 PATH 目录下，这里我选了 <code>/usr/bin</code> 目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">move gkd /usr/bin</code></pre></td></tr></table>
+</div>
+</div>
+<p>好了，现在配置已经完成，只要在一条命令前加上 <code>gkd</code>，这条命令的网络流量就会走代理，而且对当前 shell 的环境变量没有任何影响。
+我们来测试一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl ipinfo.io
+<span class="o">{</span>
+  <span class="s2">&#34;ip&#34;</span>: <span class="s2">&#34;马赛克.39.42.128&#34;</span>,
+  <span class="s2">&#34;city&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+  <span class="s2">&#34;region&#34;</span>: <span class="s2">&#34;Beijing&#34;</span>,
+  <span class="s2">&#34;country&#34;</span>: <span class="s2">&#34;CN&#34;</span>,
+  <span class="s2">&#34;loc&#34;</span>: <span class="s2">&#34;39.9289,116.3880&#34;</span>,
+  <span class="s2">&#34;postal&#34;</span>: <span class="s2">&#34;100009&#34;</span>,
+  <span class="s2">&#34;org&#34;</span>: <span class="s2">&#34;AS4847 China Networks Inter-Exchange&#34;</span>
+<span class="o">}</span>
+
+gkd curl ipinfo.io
+<span class="o">{</span>
+  <span class="s2">&#34;ip&#34;</span>: <span class="s2">&#34;马赛克.24.185.217&#34;</span>,
+  <span class="s2">&#34;city&#34;</span>: <span class="s2">&#34;Los Angeles&#34;</span>,
+  <span class="s2">&#34;region&#34;</span>: <span class="s2">&#34;California&#34;</span>,
+  <span class="s2">&#34;country&#34;</span>: <span class="s2">&#34;US&#34;</span>,
+  <span class="s2">&#34;loc&#34;</span>: <span class="s2">&#34;34.0438,-118.2510&#34;</span>,
+  <span class="s2">&#34;hostname&#34;</span>: <span class="s2">&#34;216.24.185.217.16clouds.com&#34;</span>,
+  <span class="s2">&#34;postal&#34;</span>: <span class="s2">&#34;90014&#34;</span>,
+  <span class="s2">&#34;phone&#34;</span>: <span class="s2">&#34;213&#34;</span>,
+  <span class="s2">&#34;org&#34;</span>: <span class="s2">&#34;AS25820 IT7 Networks Inc&#34;</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>果然，第二条 curl 命令返回的结果显示我们的访问来自美国，代理成功。以后无论是用 wget 下文件，还是用 go get 拉取依赖，只要在命令前加上 <code>gkd</code>，它就会很自觉地“搞快点”啦~</p>
+
+<p>接下来解释一下这个 <code>gkd</code> 脚本的工作原理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 指定 shell 解释器为 bash。</span>
+<span class="cp">#!/usr/bin/env bash
+</span><span class="cp"></span>
+<span class="c1"># 设置 http_proxy 环境变量</span>
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://ip:port
+
+<span class="c1"># 这里是关键</span>
+<span class="nb">exec</span> <span class="si">${</span><span class="p">@:</span><span class="nv">1</span><span class="si">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><code>exec</code> 是 bash 中的一个内部命令，用于执行 <code>${@:1}</code> 所表示的命令。<code>${@:1}</code> 表示传递给这个脚本的所有参数，当执行 <code>gkd curl ipinfo.io</code> 时，<code>curl</code> 和 <code>ipinfo.io</code> 是传递给这个脚本的两个参数，因此 <code>exec ${@:1}</code> 会被解释为 <code>exec curl ipinfo.io</code>，而且 <code>exec</code> 命令可以继承父进程的环境变量，从而实现代理。而执行脚本的进程本身是我们敲命令的 shell 的子进程，修改它的上下文不会影响父进程，因此代理的影响只局限于 <code>gkd curl ipinfo.io</code> 一条命令。</p>
+
+<p>感觉自己解释的不是很好，有疑问的童鞋可以看一下下面的两个参考资料。</p>
+
+<h3 id="参考">参考</h3>
+
+<ol>
+<li><a href="https://www.gnu.org/software/bash/manual/bash.html">Bash Reference Manual</a></li>
+<li><a href="https://www.jianshu.com/p/dd7956aec097">shell，exec，source执行脚本的区别</a></li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">邵溧崟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-07-21
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a>
+          <a href="/tags/setup-guide/">setup-guide</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/flink-cluster-setup/">
+            <span class="next-text nav-default">Flink 集群搭建教程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:shaoliyinde@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/sean-pearce" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/seanpearce" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://shaoliyin.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">邵溧崟</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

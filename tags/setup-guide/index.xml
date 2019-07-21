@@ -6,10 +6,22 @@
     <description>Recent content in Setup Guide on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 29 May 2019 21:28:14 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 16:24:12 +0800</lastBuildDate>
     
 	<atom:link href="https://shaoliyin.me/tags/setup-guide/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>命令行代理小工具——gkd</title>
+      <link>https://shaoliyin.me/post/cli-proxy-tool/</link>
+      <pubDate>Sun, 21 Jul 2019 16:24:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/cli-proxy-tool/</guid>
+      <description>&lt;p&gt;哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……&lt;/p&gt;
+
+&lt;p&gt;从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Flink 集群搭建教程</title>

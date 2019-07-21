@@ -6,10 +6,28 @@
     <description>Recent content in Tags on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 29 May 2019 21:28:14 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 16:24:12 +0800</lastBuildDate>
     
 	<atom:link href="https://shaoliyin.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Setup Guide</title>
+      <link>https://shaoliyin.me/tags/setup-guide/</link>
+      <pubDate>Sun, 21 Jul 2019 16:24:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/tags/setup-guide/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>科学上网</title>
+      <link>https://shaoliyin.me/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</link>
+      <pubDate>Sun, 21 Jul 2019 16:24:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Flink</title>
@@ -17,15 +35,6 @@
       <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
       
       <guid>https://shaoliyin.me/tags/flink/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Setup Guide</title>
-      <link>https://shaoliyin.me/tags/setup-guide/</link>
-      <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
-      
-      <guid>https://shaoliyin.me/tags/setup-guide/</guid>
       <description></description>
     </item>
     
