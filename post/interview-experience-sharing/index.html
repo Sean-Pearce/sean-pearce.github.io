@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>实习面试经历分享 - 邵溧崟的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="邵溧崟" /><meta name="description" content="两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。
+" /><meta name="keywords" content="实习面试, 字节跳动, Momenta, 旷视, 分布式存储" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with even 4.0.0" />
+
+
+<link rel="canonical" href="https://shaoliyin.me/post/interview-experience-sharing/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="实习面试经历分享" />
+<meta property="og:description" content="两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://shaoliyin.me/post/interview-experience-sharing/" />
+<meta property="article:published_time" content="2019-09-21T20:56:58&#43;08:00"/>
+<meta property="article:modified_time" content="2019-09-21T20:56:58&#43;08:00"/>
+
+<meta itemprop="name" content="实习面试经历分享">
+<meta itemprop="description" content="两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。">
+
+
+<meta itemprop="datePublished" content="2019-09-21T20:56:58&#43;08:00" />
+<meta itemprop="dateModified" content="2019-09-21T20:56:58&#43;08:00" />
+<meta itemprop="wordCount" content="6431">
+
+
+
+<meta itemprop="keywords" content="面经," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="实习面试经历分享"/>
+<meta name="twitter:description" content="两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">邵溧崟的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">邵溧崟的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">实习面试经历分享</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-09-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%B7%A5%E4%BD%9C/"> 工作 </a>
+            </div>
+          <span class="more-meta"> 约 6431 字 </span>
+          <span class="more-meta"> 预计阅读 13 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#字节跳动">字节跳动</a>
+<ul>
+<li><a href="#一面">一面</a></li>
+<li><a href="#二面">二面</a></li>
+</ul></li>
+<li><a href="#momenta">Momenta</a>
+<ul>
+<li><a href="#一面-1">一面</a></li>
+<li><a href="#二面-1">二面</a></li>
+<li><a href="#三面">三面</a></li>
+</ul></li>
+<li><a href="#旷视">旷视</a>
+<ul>
+<li><a href="#一面-2">一面</a></li>
+<li><a href="#二面-2">二面</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。</p>
+
+<p>其实每次面试结束以后我都会把面试官问到的问题记录下来，但一直懒得整理。今天恰逢周末，又想到自己在面试前也看了很多博主分享的面经，只进不出似乎不太厚道，因此自己的经历也分享出来，供大家参考。</p>
+
+<h2 id="字节跳动">字节跳动</h2>
+
+<ul>
+<li>面试时间：2019.9.8</li>
+<li>岗位：广告大数据研发实习生</li>
+<li>结果：二面挂</li>
+</ul>
+
+<h3 id="一面">一面</h3>
+
+<ul>
+<li><p>Q：不好意思午觉睡过了……简单介绍一下自己吧，我看一下你的简历。</p></li>
+
+<li><p>A：面试官您好，我叫……（先说了一下自己的学校和专业，然后比较粗略地过了一遍自己简历上的两个项目。）</p></li>
+
+<li><p>Q：可以具体介绍一下云际存储项目吗？</p></li>
+
+<li><p>A：好的……（讲了一遍上传下载文件的完整流程）</p></li>
+
+<li><p>Q：这个系统的意义是什么呢？</p></li>
+
+<li><p>A：一是为了避免云锁定，二是可以提供更高级别的容灾，即使一个云完全挂掉，也不影响用户数据的取回。</p></li>
+
+<li><p>Q：为什么不使用多副本呢？它真的可以降低成本吗？我们来算一下……</p></li>
+
+<li><p>A：（计算多副本和纠删码分块的成本，结果显示采用纠删码分块确实可以降低成本）</p></li>
+
+<li><p>Q：我们来聊一聊Raft吧，Raft的实现细节是什么样的？</p></li>
+
+<li><p>A：（从Raft集群启动讲起，每个节点的状态转移条件，以及不同情况下集群的状态，后续提问非常细节，按下不表）</p></li>
+</ul>
+
+<p>（前两个项目问完，已经过了20-30分钟）</p>
+
+<ul>
+<li><p>Q：锁有哪几种？</p></li>
+
+<li><p>A：互斥锁，信号量……额，不知道了</p></li>
+
+<li><p>Q：还有原子变量。Python中的字典是线程安全的吗？</p></li>
+
+<li><p>A：应该是吧，Python有GIL锁，同一时间只能有一个线程在执行。（其实并不安全，这和GIL锁没关系）</p></li>
+
+<li><p>Q：那Java里的哈希表是线程安全的吗？</p></li>
+
+<li><p>A：不是，Java里哈希表有专门的线程安全实现。</p></li>
+
+<li><p>Q：你的Raft是用Golang写的吧？问一个Golang的问题，如果我要等待一个函数调用一段时间，如果超时则停止等待，应该怎么实现？</p></li>
+
+<li><p>A：应该是用select和time.after（我前几天正好看了这个，但是没记住具体写法，就有个印象），具体怎么写我不记得了。</p></li>
+
+<li><p>Q：尝试写一下吧。</p></li>
+
+<li><p>A：好吧……（挣扎着写了一个select语句，大概结构是对的，但是不完整）</p></li>
+
+<li><p>Q：你只写了一半啊（面试官并不满意，但看我也写不出来了，就放过我了）。我们做一道题吧。实现pow函数，pow(m, n) = m ** n。</p></li>
+
+<li><p>A：（一上来有点紧张，直接写了个暴力解法，复杂度O(n)，而且n = 0等特殊情况没有考虑到）</p></li>
+
+<li><p>Q：这个实现的时间复杂度是多少？</p></li>
+
+<li><p>A：O(n)</p></li>
+
+<li><p>Q：有没有更好的解法？</p></li>
+
+<li><p>A：有……（这时候反应过来了，可以递归调用自身求pow(m, n/2)再平方，也考虑了m = 0, n = 0等特殊情况）</p></li>
+
+<li><p>Q：0的0次方是多少？</p></li>
+
+<li><p>A：1吧……（我的代码里先判断了m是否为0，如果是则直接返回0，因此有问题）</p></li>
+
+<li><p>Q：OK，我们来考虑一个负载均衡的问题（开始讲问题背景）</p></li>
+
+<li><p>A：（面试官刚开始说，我就表示自己没做过负载均衡）</p></li>
+
+<li><p>Q：你不是分布式系统方向的吗？怎么会没涉及过负载均衡？</p></li>
+
+<li><p>A：（跟面试官解释我们实验室的方向）</p></li>
+
+<li><p>Q：哦原来是大数据方向的啊，不好意思我弄错了，那你在学校都上过什么课啊？</p></li>
+
+<li><p>A：计算机网络，计算机体系结构，算法，机器学习……</p></li>
+
+<li><p>Q：（若有所思）那我们再做一道题吧！（将数组划分为和相等的两部分，leetcode原题）</p></li>
+
+<li><p>A：这个很明显是背包问题的变种（我没做过这道题，但是面试当天上午正好复习了一下背包问题，所以印象很深刻，花了不到三分钟写出了递推关系式）</p></li>
+
+<li><p>Q：不错，那如果要把数组划分为和相等的三部分呢？</p></li>
+
+<li><p>A：额，我想一下（思路错了，想了很久没能想出来，最后面试官走了以后才想到正确解法）</p></li>
+
+<li><p>Q：OK一面就到这里，我去叫一下二面面试官。</p></li>
+
+<li><p>A：好的。</p></li>
+</ul>
+
+<p>一面总结：面试官看着很年轻，估计也就毕业一两年。面试过程基本就是谈笑风生，一点也不严肃哈哈哈。他走了没一会儿给我打电话说二面面试官在开会，问我可不可以等半个小时，我答应了。</p>
+
+<h3 id="二面">二面</h3>
+
+<p>每场面试一上来都是自我介绍，之后就不会再提了。</p>
+
+<ul>
+<li><p>Q：具体介绍一下云际存储项目。</p></li>
+
+<li><p>A：（略）</p></li>
+
+<li><p>Q：OK，我们来做一道题。（两个有序数组，找第k小的数）</p></li>
+
+<li><p>A：（一时有点懵，说了个双指针的解法，时间复杂度O(k)）</p></li>
+
+<li><p>Q：有没有更好的解法？</p></li>
+
+<li><p>A：O(k)都不够好的话，只能是O(logk)了（想了一会儿还是没有思路）</p></li>
+
+<li><p>Q：那我们稍微换一下，在一个无序数组中找出第k小的数。</p></li>
+
+<li><p>A：（心中窃喜，这题我见过）这题可以用快排的思想，每次把一个元素归位，然后就可以知道第k小的元素在前半部分还是后半部分，然后缩小搜索范围，直到找到第k个数。</p></li>
+
+<li><p>Q：那你实现一下。</p></li>
+
+<li><p>A：（因为才看过没多久，印象很深，很快就写出来了，面试官可能没见过这种方法，所以思考了一会儿才确定我的实现没问题）</p></li>
+
+<li><p>Q：那我们回头看刚才这道题，其实两道题的思想差不多，你再思考一下。</p></li>
+
+<li><p>A：（我靠我以为翻篇儿了，结果还是绕回来了。我当然知道思想差不多啊，时间复杂度要求O(logk)那肯定是二分啊，问题是怎么个二分法）</p></li>
+</ul>
+
+<p>（之后在面试官的好几次提示之后，我终于似懂非懂地明白了解法，然后面试官让我实现一下，头晕脑胀的我草草写了一个实现，漏洞很多，面试官挑了几个错问了一下，
+而我只想赶紧跳过这道题😂）</p>
+
+<ul>
+<li>Q：二面就到这里，我去和三面面试官商量一下。</li>
+</ul>
+
+<p>二面总结：宇宙条的算法题果然名不虚传，二面上来就是一道hard+难度的题。leetcode上没有原题，但是有一道类似的题——Median of Two Sorted arrays（hard难度），那道面试题相当于是这道题的泛化版。说实话，我觉得这种难度的题除非事先见过类似的，不然根本不可能在面试的短短十几分钟内想出来并bugfree地实现出来。二面面试官走了以后我等了半个多小时，他才回来让我回家等通知（也就是挂了），然后我就如释重负回学校吃饭了。</p>
+
+<p>总结：我人生中的第一次面试就这样结束了，其实在去之前我就抱着必挂的决心——毕竟是宇宙条啊，怎么可能要我这种咸鱼。但是回过头看，其实也没那么可怕，如果准备的充分一点，完全是有机会的（前提是算法题都能做出来）。另外说一下这次面试的体验，很差，没错是很差。首先，效率低，我约的是下午两点开始面试，离开的时候已经五点了，整整三个小时就面了两场我也是服气。其次，面试竟然在食堂里进行，我刚进去的时候甚至还能闻到饭味儿，而且人特别多，环境很嘈杂，不知道这家公司是怎么考虑的。最后，为什么二面之后要等半个小时才让我回去，早干什么去了，浪费时间。</p>
+
+<p>字节跳动面试建议：（其实面哪个公司都这些建议）</p>
+
+<ol>
+<li>无论面什么岗位，基础知识（操作系统，计算机网络等）一定要扎实，临阵磨枪不可靠，要注重平时的积累和总结。</li>
+<li>至少熟练掌握一门编程语言，了解它的各种特性，建议多买几本好书看看。</li>
+<li>准备1-2个与面试岗位相关的项目，这样就可以和面试官谈笑风生了，如果聊的开心的话会是一个很大的加分项，而且可以拖延面试时间，让面试官少问两道算法题。但必须是自己亲手做的，不然被问住那可就尴尬了。</li>
+<li>算法题要多刷——确保面试时不会碰到陌生题型，常刷——保持手感，常总结——算法题是做不完的，但题型是有限的，要学会举一反三。另外注意刷题效率，不要死扣，刷题这件事注重的是结果，不是过程。30分钟内没做完立马看答案，然后在理解解法的基础上把答案默写出来就可以了。</li>
+<li>字节跳动的算法题偏难，因此要注重刷题，难题也不能放过，每个类型的题目最好都覆盖到。</li>
+<li>心态放平，面过了自然最好，面不过就当它是经验宝宝，每次失败都会让自己变得更强。</li>
+</ol>
+
+<h2 id="momenta">Momenta</h2>
+
+<ul>
+<li>面试时间：2019.9.9</li>
+<li>岗位：分布式存储实习生</li>
+<li>结果：拿到offer</li>
+</ul>
+
+<h3 id="一面-1">一面</h3>
+
+<ul>
+<li><p>Q：先自我介绍一下吧。</p></li>
+
+<li><p>A：balabala……</p></li>
+
+<li><p>Q：（面试官开始自我介绍，讲他们组目前在做的事，比我说的时间都久，把我整的有点懵）</p></li>
+
+<li><p>A：哦，嗯，好厉害~</p></li>
+
+<li><p>Q：我看你简历上写了读过MapReduce，GFS，Raft，你来说说GFS吧。</p></li>
+
+<li><p>A：（我内心一万头草泥马在奔腾，GFS才刚看了个开头，果然不应该把自己不懂的东西写进简历里啊）那个……不好意思，GFS刚看了一半，要不咱聊聊其他两篇？</p></li>
+
+<li><p>Q：我们是做存储的，当然要聊GFS了，没事儿，你看到哪儿就说到哪儿吧。</p></li>
+
+<li><p>A：（好吧面试官是不打算放我一马了，只能硬着头皮上了）GFS集群由两种节点构成，master和chunkserver，master负责元信息管理，chunkserver负责块存储。client读请求处理过程是……，写请求处理过程是……</p></li>
+
+<li><p>Q：写的过程中chunkserver是平等的吗？</p></li>
+
+<li><p>A：不是，有一个chunkserver是primary的。</p></li>
+
+<li><p>Q：这个身份是如何获得的？</p></li>
+
+<li><p>A：额……不好意思，我就看到这儿了……</p></li>
+
+<li><p>Q：好吧（面试官也很无奈），那我们来聊聊Raft。</p></li>
+
+<li><p>A：好的（内心狂喜但还是要保持镇定），Raft……（此处略去一万字以及面试官的数个提问）</p></li>
+
+<li><p>Q：我们聊聊其他的，你平时用Git吗？</p></li>
+
+<li><p>A：用啊，我们实验室内部就有专用的GitLab服务。</p></li>
+
+<li><p>Q：那用的是CLI还是GUI客户端呢？</p></li>
+
+<li><p>A：那肯定是CLI啊，客户端多不得劲儿。</p></li>
+
+<li><p>Q：好习惯，希望你能坚持下去。你有没有用过一些Git的高级操作，比如……rebase？</p></li>
+
+<li><p>A：我知道rebase是用来更改提交历史，整理提交历史树的，但是我亲自操作的比较少（其实压根没用过）。我最近用的高级操作……子模块算一个吧。</p></li>
+
+<li><p>Q：我们在工作中经常用到k8s和docker，你听说过它们吗？</p></li>
+
+<li><p>A：听说过，k8s是容器编排工具，docker是容器，也就是轻量化虚拟机。但是没有自己动手实践过。</p></li>
+
+<li><p>Q：OK，我们来做一个题吧。自己设计数据结构，实现LRU Cache，没问题吧？</p></li>
+
+<li><p>A：好的。（Leetcode原题，但是是去年做的，一点都不记得了/(ㄒoㄒ)/~~，不过还好经过提醒写出来了）</p></li>
+
+<li><p>Q：时间到了，一面就到这里，我去叫下一位面试官。</p></li>
+
+<li><p>A：好的。</p></li>
+</ul>
+
+<p>一面总结：面试官很年轻，也很好说话，在我表示对GFS不熟的情况下也没有多说什么。最后写算法的时候因为思路不太确定和他沟通了多次，他通过苏格拉底式教学法
+（反问的方式）给我了一些提示，很nice~</p>
+
+<h3 id="二面-1">二面</h3>
+
+<p>（国际惯例，自我介绍）</p>
+
+<ul>
+<li><p>Q：我们是做存储的，所以对文件的读写过程要非常了解，你可以介绍一下吗？越详细越好。</p></li>
+
+<li><p>A：额……这块儿我不是特别熟（提前打预防针），写文件的话，操作系统先和VFS沟通，然后VFS负责和真实的文件系统沟通……（说了几句就说不下去了）</p></li>
+
+<li><p>Q：你刚才提到了机械硬盘，那么除此之外硬盘还有哪些种类呢？</p></li>
+
+<li><p>A：固态硬盘，还有……带固态缓存的机械硬盘？不知道了。（感觉自己萌蠢萌蠢的）</p></li>
+
+<li><p>Q：你平时Linux用的多吗？最喜欢的命令是什么？</p></li>
+
+<li><p>A：挺多的，最喜欢的命令嘛，ls吧，用的最多（我真是太蠢了，当然要说一个高大上一点的命令啊）</p></li>
+
+<li><p>Q：当前工作目录下有很多目录，每个目录下有很多子目录和文件，要找出所有包含某个字符串的文件应该怎么做？</p></li>
+
+<li><p>A：（开始慌了）用find命令可以搜索文件名，文件内容的话我没用过，可能也是用find命令吧。（其实使用grep）</p></li>
+
+<li><p>Q：那接下来做道题吧（你太菜了，我不想跟你说话了）。写一个链表原地排序。</p></li>
+
+<li><p>A：那就是归并排序呗。</p></li>
+
+<li><p>Q：实现一下（talk is cheap，show me the code）</p></li>
+
+<li><p>A：写好了（凭借惊人的记忆力😂）</p></li>
+
+<li><p>Q：好的今天面试就到这里，HR一周内会联系你。</p></li>
+</ul>
+
+<p>二面总结：感觉面试官问的几个问题都没答好，最后一道算法倒是写的挺快。毕竟自己就是做存储的，这些基础知识应该要掌握，回去努力吧。</p>
+
+<h3 id="三面">三面</h3>
+
+<p>三面是电话面，主要聊了聊自己的兴趣啊，职业规划啊，人生理想啊（都是面试官问的，我之前其实都没考虑过自己的职业规划），然后面试官介绍了他们目前做的一些工
+作，包括分布式存储和计算资源的调度，还表示如果我能来的话肯定可以成长的很快。</p>
+
+<h2 id="旷视">旷视</h2>
+
+<ul>
+<li>面试时间：2019.9.10</li>
+<li>岗位：分布式存储实习生</li>
+<li>结果：拿到offer</li>
+</ul>
+
+<h3 id="一面-2">一面</h3>
+
+<p>（自我介绍）</p>
+
+<ul>
+<li><p>Q：你的专业是分布式系统，说说对分布式系统的理解。</p></li>
+
+<li><p>A：我的理解是当一个问题规模太大，单机无法解决的时候，就需要分布式系统。虽然分布式系统扩展了处理问题的能力，但同时也带来了一致性、可用性的问题。</p></li>
+
+<li><p>Q：你的简历里提到了Raft，介绍一下。</p></li>
+
+<li><p>A：（此处省略一万字）</p></li>
+
+<li><p>Q：我们来聊一聊基础一点的问题吧，你知道https吧，它和http有什么区别？</p></li>
+
+<li><p>A：https是在http之下增加了ssl或tls层的更加安全的网络协议。</p></li>
+
+<li><p>Q：它具体的工作机制是怎么样的呢？</p></li>
+
+<li><p>A：那我就从握手说起了可以吗？（给面试官挖坑）</p></li>
+
+<li><p>Q：可以。</p></li>
+
+<li><p>A：最开始当然是TCP三次握手建立连接，然后开始建立SSL连接，Client发送Hello报文……（详细说了SSL九次握手的过程，面试之前专门背了这个，但前两次面试一直没有问到，这次终于可以表现一下了哈哈哈）</p></li>
+
+<li><p>Q：OK，你刚才提到TCP建立连接需要三次握手，为什么是三次呢？</p></li>
+
+<li><p>A：参考这个回答</p></li>
+
+<li><p>Q：说一下TCP连接断开的过程。</p></li>
+
+<li><p>A：（详细讲了一下四次挥手的过程）</p></li>
+
+<li><p>Q：为什么Client要有TIME_WAIT状态？</p></li>
+
+<li><p>A：为了防止最后一个ACK包丢失需要重发，否则可能导致服务端连接无法断开。</p></li>
+
+<li><p>Q：死锁发生的条件是什么？</p></li>
+
+<li><p>A：操作系统里学的，四个条件，请求并保持，循环等待……额，剩下两个忘了</p></li>
+
+<li><p>Q：最后写一道题吧，实现一个读写锁。</p></li>
+
+<li><p>A：（完全不知道咋实现，用channel实现了一个互斥锁草草了事，后来发现channel本身就是用锁实现的……）</p></li>
+</ul>
+
+<p>一面总结：面试官很给面子，问了好几个烂大街的问题，正好撞我枪口上了，最后那个锁的问题我还真没关注过，需要学习一下</p>
+
+<h3 id="二面-2">二面</h3>
+
+<p>（自我介绍）</p>
+
+<ul>
+<li><p>Q：先来写一道题吧，有没有用过Golang的path包？</p></li>
+
+<li><p>A：没有……</p></li>
+
+<li><p>Q：没关系，这不重要，请你实现这样一个函数（Leetcode71）</p></li>
+
+<li><p>A：（和面试官讨论了一下输入输出细节，然后比较顺利的写出来了）</p></li>
+
+<li><p>Q：那接下来考虑这样一个问题，一个容量为1TB的机械硬盘，写满int64的有序数据，请实现一个函数，输入是一个int64类型的数字，判断这个数字是否出现在上述硬盘中，然后返回一个布尔值。这个函数应该在尽可能短的时间内返回。另外，这个硬盘的延迟时间是10ms，读取速度是100MB/s，你有10GB的内存空间可以使用，在函数的初始化阶段进行的操作不会计入总响应时间。</p></li>
+
+<li><p>A：既然是有序数据，那么肯定是二分查找。但是这些数据在硬盘上，如果每次二分都要去读硬盘的话延迟太高了，所以要事先把一部分数据放到内存里，二分在内存里进行。</p></li>
+
+<li><p>Q：具体要怎么做呢？</p></li>
+
+<li><p>A：每次调用时，函数一次性分散地读n个数，然后在这n个数中进行二分，然后在剩下的两个数之间再分散地读n个数……直到找到输入的数字或者无法继续二分。</p></li>
+
+<li><p>Q：那函数平均需要多少时间才能返回呢？</p></li>
+
+<li><p>A：（算了一会儿发现不对，一次性分散读n个数其实就是随机读n个数，和最naive的做法其实没有本质区别）</p></li>
+
+<li><p>Q：（面试官提醒可以在预处理阶段进行一些操作）</p></li>
+
+<li><p>A：可以在预处理阶段，每隔128个数字将一个数字读入内存，二分直接在内存里进行，直到找到输入数字可能存在的最小区间，然后再去磁盘里查找。</p></li>
+
+<li><p>Q：有没有进一步优化的空间了？</p></li>
+
+<li><p>A：（脑抽想了个二级索引，其实操作系统中引入二级索引是为了减小索引文件的大小，和这个题没什么关系）</p></li>
+
+<li><p>Q：机械硬盘的顺序读比随机读快很多，应该利用这一特点，把最后的128个数字一次性读入内存，在内存中做二分查找，这样就可以实现一次调用，只读一次盘了。</p></li>
+
+<li><p>A：（好厉害~）</p></li>
+</ul>
+
+<p>二面总结：二面其实就问了两个问题，一道算法，一个场景分析题。第二个问题非常有意思，既有用空间换时间的思想，又充分考虑了机械硬盘的特性，学到了~</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">邵溧崟</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-09-21
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%9D%A2%E7%BB%8F/">面经</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cli-proxy-tool/">
+            <span class="next-text nav-default">命令行代理小工具——gkd</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:shaoliyinde@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/sean-pearce" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/seanpearce" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://shaoliyin.me/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">邵溧崟</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,10 +6,19 @@
     <description>Recent content in Categories on 邵溧崟的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 21 Jul 2019 16:24:12 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 21 Sep 2019 20:56:58 +0800</lastBuildDate>
     
 	<atom:link href="https://shaoliyin.me/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>工作</title>
+      <link>https://shaoliyin.me/categories/%E5%B7%A5%E4%BD%9C/</link>
+      <pubDate>Sat, 21 Sep 2019 20:56:58 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/categories/%E5%B7%A5%E4%BD%9C/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>技术</title>

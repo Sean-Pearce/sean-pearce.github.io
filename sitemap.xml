@@ -10,24 +10,49 @@
   
   <url>
     <loc>https://shaoliyin.me/categories/</loc>
-    <lastmod>2019-07-21T16:24:12+08:00</lastmod>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://shaoliyin.me/post/</loc>
-    <lastmod>2019-07-21T16:24:12+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://shaoliyin.me/tags/setup-guide/</loc>
-    <lastmod>2019-07-21T16:24:12+08:00</lastmod>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://shaoliyin.me/tags/</loc>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/post/interview-experience-sharing/</loc>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/categories/%E5%B7%A5%E4%BD%9C/</loc>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/</loc>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/tags/%E9%9D%A2%E7%BB%8F/</loc>
+    <lastmod>2019-09-21T20:56:58+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/tags/setup-guide/</loc>
     <lastmod>2019-07-21T16:24:12+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -47,12 +72,6 @@
   
   <url>
     <loc>https://shaoliyin.me/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
-    <lastmod>2019-07-21T16:24:12+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://shaoliyin.me/</loc>
     <lastmod>2019-07-21T16:24:12+08:00</lastmod>
     <priority>0</priority>
   </url>
