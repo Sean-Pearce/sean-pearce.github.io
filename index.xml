@@ -7,12 +7,65 @@
         
         <language>zh-cn</language>
         
-        <lastBuildDate>Sat, 21 Sep 2019 20:56:58 +0800</lastBuildDate>
+        <lastBuildDate>Fri, 08 Nov 2019 21:07:50 +0800</lastBuildDate>
         
     
         <atom:link href= "https://shaoliyin.me/index.xml" rel= "self" type= "application/rss+xml" />
     
     
+        <item>
+            <title>Windows 工作环境配置</title>
+            <link>https://shaoliyin.me/post/new-computer-setup/</link>
+            <pubDate>Fri, 08 Nov 2019 21:07:50 +0800</pubDate>
+            
+            <guid>https://shaoliyin.me/post/new-computer-setup/</guid>
+            <description>&lt;p&gt;记录一下 Windows 工作环境的配置过程，做个备忘。&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisite&#34;&gt;Prerequisite&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tools.shuax.com/chrome/&#34;&gt;Chrome&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/shadowsocks/shadowsocks-windows/releases&#34;&gt;Shadowsocks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;常用软件&#34;&gt;常用软件&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pc.weixin.qq.com/&#34;&gt;微信&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://music.163.com/#/download&#34;&gt;网易云音乐&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://zh.snipaste.com/download.html&#34;&gt;Snipaste&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jianguoyun.com/s/downloads&#34;&gt;坚果云&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://cidian.youdao.com/multi.html&#34;&gt;有道词典&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sumatrapdfreader.org/download-free-pdf-viewer.html&#34;&gt;SumatraPDF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.7-zip.org/&#34;&gt;7-Zip&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pandownload.com/&#34;&gt;PanDownload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://potplayer.daum.net/&#34;&gt;PotPlayer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/QL-Win/QuickLook/releases&#34;&gt;QuickLook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.oldversion.cn/windows/utorrent-3-2-3-build-28705&#34;&gt;uTorrent&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.autohotkey.com/download/&#34;&gt;AutoHotKey&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://msdn.itellyou.cn/&#34;&gt;Office2016&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;开发环境&#34;&gt;开发环境&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://git-scm.com/download/win&#34;&gt;Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://golang.org/dl/&#34;&gt;Go&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.python.org/downloads/&#34;&gt;Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://code.visualstudio.com/download&#34;&gt;VSCode&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jetbrains.com/go/download/&#34;&gt;Goland&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.jetbrains.com/pycharm/download/&#34;&gt;Pycharm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/powerline/fonts/tree/master/DejaVuSansMono&#34;&gt;DejaVuSansMono&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://mobaxterm.mobatek.net/download.html&#34;&gt;MobaXterm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;激活&#34;&gt;激活&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://03k.org/kms.html&#34;&gt;Windows &amp;amp; Office&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+        </item>
+        
         <item>
             <title>实习面试经历分享</title>
             <link>https://shaoliyin.me/post/interview-experience-sharing/</link>

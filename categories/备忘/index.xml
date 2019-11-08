@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>备忘 on 邵溧崟的博客</title>
+    <link>https://shaoliyin.me/categories/%E5%A4%87%E5%BF%98/</link>
+    <description>Recent content in 备忘 on 邵溧崟的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 08 Nov 2019 21:07:50 +0800</lastBuildDate>
+    
+	<atom:link href="https://shaoliyin.me/categories/%E5%A4%87%E5%BF%98/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Windows 工作环境配置</title>
+      <link>https://shaoliyin.me/post/new-computer-setup/</link>
+      <pubDate>Fri, 08 Nov 2019 21:07:50 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/new-computer-setup/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
