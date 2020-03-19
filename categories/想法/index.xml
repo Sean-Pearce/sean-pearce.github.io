@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>想法 on 邵溧崟的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://shaoliyin.me/post/my-first-blog/</guid>
       <description>&lt;p&gt;很久以来我一直想拥有一个属于自己的博客，但每每想到维护网站的那一堆麻烦事，就失去了折腾的动力。&lt;/p&gt;
-
 &lt;p&gt;最近在参与实验室项目的过程中，接触到很多新技术新知识，愈发地觉得有必要把自己学到的东西记录下来，一方面可以给自己做个备忘，避免重复劳动，另一方面也可以把自己的思考分享到互联网上。因此我用两天时间（其中大部分时间花在了挑选主题上），在 Github Pages 上部署了这个博客。&lt;/p&gt;</description>
     </item>
     

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>技术 on 邵溧崟的博客</title>
@@ -18,7 +18,6 @@
       
       <guid>https://shaoliyin.me/post/cli-proxy-tool/</guid>
       <description>&lt;p&gt;哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……&lt;/p&gt;
-
 &lt;p&gt;从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
 有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。&lt;/p&gt;</description>
     </item>
@@ -39,7 +38,6 @@
       
       <guid>https://shaoliyin.me/post/hadoop-cluster-setup/</guid>
       <description>&lt;p&gt;这篇文章是我前段时间搭建一个三节点 Hadoop 集群时顺便整理的，集群包含 192.168.105.10 / 11 / 12 三台机器，三台机器的 hostname 分别设为 ivic10 / ivic11 / ivic12，其中第一台机器作为 master，后两台作为 slaves。&lt;/p&gt;
-
 &lt;p&gt;搭建过程中我参考了 Hadoop 官方文档和几篇博客，但还是遇到了一些问题，于是我把整个过程记录了下来，希望可以帮助到大家。&lt;/p&gt;</description>
     </item>
     
