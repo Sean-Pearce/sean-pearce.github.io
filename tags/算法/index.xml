@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on 邵溧崟的博客</title>
+    <link>https://shaoliyin.me/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on 邵溧崟的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 19 Mar 2020 21:20:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://shaoliyin.me/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>找出数组中只出现一次的数字</title>
+      <link>https://shaoliyin.me/post/find-single-number/</link>
+      <pubDate>Thu, 19 Mar 2020 21:20:23 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/find-single-number/</guid>
+      <description>&lt;h3 id=&#34;题目描述&#34;&gt;题目描述&lt;/h3&gt;
+&lt;p&gt;在一个数组 &lt;code&gt;nums&lt;/code&gt; 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+LeetCode 地址：&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/&#34;&gt;面试题56 - II. 数组中数字出现的次数 II&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

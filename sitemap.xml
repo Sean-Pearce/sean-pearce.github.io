@@ -9,6 +9,34 @@
   </url>
   
   <url>
+    <loc>https://shaoliyin.me/post/</loc>
+    <lastmod>2020-03-19T21:20:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/tags/</loc>
+    <lastmod>2020-03-19T21:20:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/post/find-single-number/</loc>
+    <lastmod>2020-03-19T21:20:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shaoliyin.me/tags/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2020-03-19T21:20:23+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://shaoliyin.me/categories/</loc>
     <lastmod>2019-11-08T21:07:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,21 +44,7 @@
   </url>
   
   <url>
-    <loc>https://shaoliyin.me/post/</loc>
-    <lastmod>2019-11-08T21:07:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://shaoliyin.me/tags/setup-guide/</loc>
-    <lastmod>2019-11-08T21:07:50+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://shaoliyin.me/tags/</loc>
     <lastmod>2019-11-08T21:07:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
