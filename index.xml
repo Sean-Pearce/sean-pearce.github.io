@@ -1,26 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>邵溧崟的博客</title>
-        <link>https://shaoliyin.me/</link>
-        <description>Recent content on 邵溧崟的博客</description>
-        <generator>Hugo -- gohugo.io</generator>
-        
-        <language>zh-cn</language>
-        
-        <lastBuildDate>Thu, 23 May 2019 16:54:12 +0800</lastBuildDate>
-        
+  <channel>
+    <title>邵溧崟的博客</title>
+    <link>https://shaoliyin.me/</link>
+    <description>Recent content on 邵溧崟的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 23 May 2019 16:54:12 +0800</lastBuildDate>
     
-        <atom:link href= "https://shaoliyin.me/index.xml" rel= "self" type= "application/rss+xml" />
+	<atom:link href="https://shaoliyin.me/index.xml" rel="self" type="application/rss+xml" />
     
     
-        <item>
-            <title>Posts</title>
-            <link>https://shaoliyin.me/post/</link>
-            <pubDate>Thu, 19 Mar 2020 21:20:23 +0800</pubDate>
-            
-            <guid>https://shaoliyin.me/post/</guid>
-            <description></description>
-        </item>
-        
-    </channel>
+    <item>
+      <title>关于</title>
+      <link>https://shaoliyin.me/about/</link>
+      <pubDate>Thu, 23 May 2019 16:54:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/about/</guid>
+      <description>About Me 本科就读于北航电子信息工程学院，目前在计算机学院读研，研究方向为分布式系统。 欢迎邮件交流。</description>
+    </item>
+    
+    <item>
+      <title>找出数组中只出现一次的数字</title>
+      <link>https://shaoliyin.me/post/find-single-number/</link>
+      <pubDate>Thu, 19 Mar 2020 21:20:23 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/find-single-number/</guid>
+      <description>&lt;h3 id=&#34;题目描述&#34;&gt;题目描述&lt;/h3&gt;
+&lt;p&gt;在一个数组 &lt;code&gt;nums&lt;/code&gt; 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。
+LeetCode 地址：&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/&#34;&gt;面试题56 - II. 数组中数字出现的次数 II&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows 工作环境配置</title>
+      <link>https://shaoliyin.me/post/new-computer-setup/</link>
+      <pubDate>Fri, 08 Nov 2019 21:07:50 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/new-computer-setup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>实习面试经历分享</title>
+      <link>https://shaoliyin.me/post/interview-experience-sharing/</link>
+      <pubDate>Sat, 21 Sep 2019 20:56:58 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/interview-experience-sharing/</guid>
+      <description>&lt;p&gt;两周前连续去面了三家互联网公司的分布式存储开发实习生岗，三家公司分别是头条，Momenta 和旷视，结果是头条挂了其他两家都给了 offer。其实从上个学期开始我就有出去实习的打算，一来是为了提前适应工作环境，在实际应用中锻炼自己的能力，二来则是想去赚点零花钱。但之前一直不太自信，觉得自己啥也不会，去面试就是找虐，直到最近把 MIT 的 6.824 做了一下，至少有了一个可以尬吹的项目，于是决定去试一试。三家公司的简历都是在实习僧上投的，这个网站真的很不错，如果有同学想找实习的话建议试一试（打钱，马上！）。我的三份简历投出去一周之内就都面完了，效率还是很高的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行代理小工具——gkd</title>
+      <link>https://shaoliyin.me/post/cli-proxy-tool/</link>
+      <pubDate>Sun, 21 Jul 2019 16:24:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/cli-proxy-tool/</guid>
+      <description>&lt;p&gt;哈罗大家好，转眼间已经到了七月份的尾巴，距离上次更新博客已经差不多两个月了，惭愧惭愧……&lt;/p&gt;
+&lt;p&gt;从 GitHub clone 过代码的童鞋肯定都知道，墙内拉代码的速度实在是太慢了，小一点的项目还好，如果代码仓库大小超过了 10MB，那可得等好一会儿了。
+有时候运气不佳甚至有可能断线，然后就只能“少侠请重新来过”了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flink 集群搭建教程</title>
+      <link>https://shaoliyin.me/post/flink-cluster-setup/</link>
+      <pubDate>Wed, 29 May 2019 21:28:14 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/flink-cluster-setup/</guid>
+      <description>&lt;p&gt;这篇文章中的部署环境和上一篇文章完全相同，记录了部署 Flink 集群的过程和遇到的一些问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hadoop 集群搭建教程</title>
+      <link>https://shaoliyin.me/post/hadoop-cluster-setup/</link>
+      <pubDate>Wed, 29 May 2019 19:38:06 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/hadoop-cluster-setup/</guid>
+      <description>&lt;p&gt;这篇文章是我前段时间搭建一个三节点 Hadoop 集群时顺便整理的，集群包含 192.168.105.10 / 11 / 12 三台机器，三台机器的 hostname 分别设为 ivic10 / ivic11 / ivic12，其中第一台机器作为 master，后两台作为 slaves。&lt;/p&gt;
+&lt;p&gt;搭建过程中我参考了 Hadoop 官方文档和几篇博客，但还是遇到了一些问题，于是我把整个过程记录了下来，希望可以帮助到大家。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>第一篇博客</title>
+      <link>https://shaoliyin.me/post/my-first-blog/</link>
+      <pubDate>Thu, 23 May 2019 16:54:12 +0800</pubDate>
+      
+      <guid>https://shaoliyin.me/post/my-first-blog/</guid>
+      <description>&lt;p&gt;很久以来我一直想拥有一个属于自己的博客，但每每想到维护网站的那一堆麻烦事，就失去了折腾的动力。&lt;/p&gt;
+&lt;p&gt;最近在参与实验室项目的过程中，接触到很多新技术新知识，愈发地觉得有必要把自己学到的东西记录下来，一方面可以给自己做个备忘，避免重复劳动，另一方面也可以把自己的思考分享到互联网上。因此我用两天时间（其中大部分时间花在了挑选主题上），在 Github Pages 上部署了这个博客。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
 </rss>
